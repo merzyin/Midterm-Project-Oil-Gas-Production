@@ -22,7 +22,9 @@ names(raw)[5] <- "Population_Level"
 names(raw)[6] <- "Urban_Influence"
 names(raw)[7] <- "If_Metro"
 names(raw)[8] <- "Metro_Micro_Noncore"
+
 raw
+
 
 # Split the table into two because there are multiple types in one table: County & Oil and Gas Production
 # Create two tables
@@ -59,8 +61,8 @@ oil_gas_tidy <- oil_gas1 %>%
 # Part 2. Data Summary
 
 # (1) average annual oil and gas production for each county
-raw$mean_oil_production <- rowSums(raw[9:20])/12
-raw$mean_gas_production <- rowSums(raw[21:32])/12
+raw$oil_production <- rowSums(raw[9:20])/12
+raw$gas_production <- rowSums(raw[21:32])/12
 
 mean_county_production <- raw %>% 
   select(FIPS,Population_Level, oil_production, gas_production) %>%
@@ -107,31 +109,23 @@ County_Level_Mean_tidy <- County_Level_Mean0 %>%
 
 # Create a table with county, county level defined by population, sum of oil production in 12 years and sum of gas production in 12 years
 county_production <- raw %>% 
-  select(FIPS,Population_Level, mean_oil_production, mean_gas_production) %>%
+  select(FIPS,Population_Level, oil_production, gas_production) %>%
   unique() %>%
   mutate(county_id = row_number())
 county_production
 
-# Create a table with the mean oil production for each county level in each year
-County_Level_Mean_Oil <- County_Level_Mean %>%
-  gather(oil,oil_production_mean, oil2000:oil2011, na.rm = TRUE) %>%
+#
+County_Level_Mean2 <- County_Level_Mean %>%
+  gather(oil,oil_production_mean, oil2000:oil2011, na.rm = TRUE)%>%
+  gather(gas, gas_production_mean, gas2000:gas2011, na.rm = TRUE)%>%
   mutate(year = parse_number(oil))%>%
-  select(County_Level, year, oil_production_mean) %>%
+  select(County_Level, year, oil_production_mean,gas_production_mean) %>%
   unique() %>%
   mutate()
-# Create a table with the mean gas production for each county level in each year
-County_Level_Mean_Gas <- County_Level_Mean %>%
-  gather(gas,gas_production_mean, gas2000:gas2011, na.rm = TRUE) %>%
-  mutate(year = parse_number(gas))%>%
-  select(County_Level, year, gas_production_mean) %>%
-  unique() %>%
-  mutate()
-
-
-
 
 # Part 3. Visualization
 require(ggplot2) 
+
 
 # 1
 # ggplot for "Relationship between Oil Production and Gas Production from 2000-2011" 
@@ -144,34 +138,30 @@ ggplot(data=national_mean_production, aes(x=factor(year), y=amount, fill=type)) 
 
 # 2
 # ggplot for "Oil Production for each County Level"
-ggplot(data = county_production, aes(factor(Population_Level),oil_production,fill=factor(Population_Level)))  +
+ggplot(data = county_production, aes(factor(Population_Level),oil_production))  +
   geom_bar(stat = "identity")+
   xlab("County Level")+
   ylab("Mean Oil Production")+
-  labs(fill="County Level")+
   scale_y_continuous(breaks=seq(0, 1200000000, 50000000))+
   ggtitle("Oil Production By County Level")
 
 # ggplot for "Gas Production for each County Level"
-ggplot(data = county_production, aes(factor(Population_Level),gas_production,fill=factor(Population_Level)))  +
+ggplot(data = county_production, aes(factor(Population_Level),gas_production))  +
   geom_bar(stat = "identity")+
   xlab("County Level")+
   ylab("Mean Gas Production")+
-  labs(fill="County Level")+
   scale_y_continuous(breaks=seq(0, 12000000000, 500000000))+
   ggtitle("Gas Production By County Level")
 
-# 3 Scatter Plot
-ggplot(county_production, aes(x = factor(Population_Level), y = oil_production))+
-  geom_point(aes(color = Population_Level))+
-  scale_y_continuous(limits = c(0, 2*10^7))+
-  xlab("County Level")+
-  ylab("Oil Production")+
-  ggtitle("oil Production of Each County in Different County Level")
+
+# 3
+# Stacked Column
+#ggplot(moil_countylevel, aes(year, fill=countylevel)) + geom_bar()
+
 
 # 4
 # ggplot for "Annual Oil Production for each County Level"
-ggplot(data = County_Level_Mean_Oil, aes(x = factor(year), y = oil_production_mean,colour = County_Level)) +       
+ggplot(data = County_Level_Mean2, aes(x = factor(year), y = oil_production_mean,colour = County_Level)) +       
   xlab("Year")+
   ylab("Mean Oil Production")+
   ggtitle("Oil Production By Year")+
@@ -179,7 +169,7 @@ ggplot(data = County_Level_Mean_Oil, aes(x = factor(year), y = oil_production_me
   scale_y_continuous(breaks=seq(0, 12000000, 200000))+
   scale_colour_gradient(low = 'lightblue', high = 'darkblue', breaks=c(1:9))
 
-ggplot(data = County_Level_Mean_Gas, aes(x = factor(year), y = gas_production_mean,colour = County_Level)) +       
+ggplot(data = County_Level_Mean2, aes(x = factor(year), y = gas_production_mean,colour = County_Level)) +       
   xlab("Year")+
   ylab("Mean Gas Production")+
   ggtitle("Gas Production By Year")+
