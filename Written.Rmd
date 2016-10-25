@@ -17,24 +17,32 @@ In this assignment, the dataset "County-level oil and gas production" (Reference
 In this part, I aim to reorganize the raw dataset and turn it into a tidy dataset for further analysis. First, read the csv. Table into R and revise columns' names for readily. Then, when viewing the dataset, I find it consists of two parts: one with the information of the county level, the other one with the production amount for each year. So, I spilt the dataset into two tables. First, I select the information of County from the raw dataset to form a table with county information using function "select", and get a table called "county". Second, I select information on annual production for each county from the raw dataset and get a table called "oil_gas0". Since there are multiple variables stored in columns such as "oil2000" which contains the type of production and year, I firstly gather up the non-variable columns and secondly separate column headers to get a tidy dataset called "oil_gas_tidy".
 
 ### 3. Dataset Summary
-In this part, I aim to provide some basic statistic summary of this dataset for further analysis. The first summary I do is the average annual oil and gas production for each county, which may help to compare the production difference between each county. The second one I do is the national wide mean production (per county) in each year which aim to trace the change of nationwide oil and gas production for each year. Thirdly, I give a tidy table with average oil and gas production for counties by each population level, which may help to explore the relationship between county level and the oil and gas production.
+In this part, I aim to provide some basic statistic summary of this dataset for further analysis. First of all, based on carefully reading on the raw dataset, I found Population level and other categorical county levels is closly related, therefore, in this project, I will only use population level as the mearsurement of county level. The first summary I do is the average annual oil and gas production for each county, which may help to compare the production difference between each county. The second one I do is the national wide mean production (per county) in each year which aim to trace the change of nationwide oil and gas production for each year. Thirdly, I give a tidy table with average oil and gas production for counties by each population level, which may help to explore the relationship between county level and the oil and gas production.
 
 ### 4. Visualization
 Based on those summarized table created in part 2, I use "ggplot" to visualize three type of relationship discovered in this "County-level oil and gas production" dataset. 
 The first one is a bar graph with oil and gas side by side to illustrate how the national mean production varied year to year and compare the differences between oil and gas production.
 ![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\1.png)
 
+
 The Second is a pair of graphs showing the mean production level of oil and gas in different county level.
 ![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\2_1.png)
 ![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\2_2.png)
 
+
 The third is a scatterplot showing how those couties lie in diffenrent county levels and oil production level.
 ![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\3.png)
+
 
 The fourth is pair of graphs showing the change in oil and gas production for each county level from 2000 to 2011.
 ![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\4_1.png)
 ![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\4_2.png)
 
+
+The fifth is a pair of stack columns shows the total production each year for all 9 county levels from 2000 to 2011, it is a comparison to the fourth, which additionaly shows the total production.
+![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\5_1.png)
+![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\5_2.png)
+ 
 ### 5. Future Question
 Although this project has provided tidy datasets, some basic summaries about the county level production and has visualized the replationship between county level, year and production, I still have couple of questions to go.
 Based on praphs in part 4, it shows that county level 2 has the most production. What is the factor influence behind? Is that because county level 1 with the most population does not focus the economy on industry production? Moreover, does that mean the energy usage is more efficient in those counties so that they do not need to produce as much energy as the others?
