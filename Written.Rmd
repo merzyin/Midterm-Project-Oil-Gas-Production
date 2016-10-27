@@ -42,6 +42,11 @@ The fourth is pair of graphs showing the change in oil and gas production for ea
 The fifth is a pair of stack columns shows the total production each year for all 9 county levels from 2000 to 2011, it is a comparison to the fourth, which additionaly shows the total production.
 ![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\5_1.png)
 ![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\5_2.png)
+
+
+The sixth demographic maps of oil and gas production for each county through 2001 to 2011.
+![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\6_1.png)
+![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\6_2.png)
  
 ### 5. Future Question
 Although this project has provided tidy datasets, some basic summaries about the county level production and has visualized the replationship between county level, year and production, I still have couple of questions to go.

@@ -67,7 +67,7 @@ raw$mean_oil_production <- rowSums(raw[demo1:demo2])/12
 raw$mean_gas_production <- rowSums(raw[demo3:demo4])/12
 
 mean_county_production <- raw %>% 
-  select(FIPS,Population_Level, oil_production, gas_production) %>%
+  select(FIPS,Population_Level, mean_oil_production, mean_gas_production) %>%
   unique() %>%
   mutate(county_id = row_number())
 
@@ -216,3 +216,33 @@ names(County_Level_Mean_Gas_year)[1:12] <- (2000:2011)
 #Stacked Barplot: Mean Gas Production By County
 barplot(as.matrix(County_Level_Mean_Gas_year),xlab="Year",ylab="Mean Gas Production",main="Mean Gas Production By County",ylim=c(0,8e+7),col=heat.colors(9))+
   legend(title="County","right",c("9","8","7","6","5","4","3","2","1"),cex=0.9,inset=c(-0.08,0),bty="n",xpd=TRUE,fill=rev(heat.colors(9)))
+
+# 6 
+ 
+library(choroplethr)
+library(choroplethrMaps)
+
+totaloil <- county_production %>% 
+  select(FIPS, mean_oil_production) %>%
+  unique() %>%
+  mutate()
+
+names(totaloil)[1] <- "region"
+names(totaloil)[2] <- "value"
+
+county_choropleth (totaloil,
+                   title ="2001-2011 Oil Production", 
+                   legend = "Quantity")
+
+totalgas <- county_production %>% 
+  select(FIPS, mean_gas_production) %>%
+  unique() %>%
+  mutate()
+
+names(totalgas)[1] <- "region"
+names(totalgas)[2] <- "value"
+
+county_choropleth (totalgas,
+                   title ="2001-2011 Gas Production", 
+                   legend = "Quantity")
+
