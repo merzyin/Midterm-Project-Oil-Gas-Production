@@ -166,12 +166,21 @@ ggplot(data = county_production, aes(factor(Population_Level),mean_gas_productio
   ggtitle("Gas Production By County Level")
 
 # 3 Scatter Plot
+# ggplot for "Oil Production of Each County In Each County Level"
 ggplot(county_production, aes(x = factor(Population_Level), y = mean_oil_production))+
   geom_point(aes(color = Population_Level))+
   scale_y_continuous(limits = c(0, 2*10^7))+
   xlab("County Level")+
   ylab("Oil Production")+
   ggtitle("oil Production of Each County in Different County Level")
+
+# ggplot for "Gas Production of Each County In Each County Level"
+ggplot(county_production, aes(x = factor(Population_Level), y = mean_gas_production))+
+  geom_point(aes(color = Population_Level))+
+  scale_y_continuous(limits = c(0, 2*10^7))+
+  xlab("County Level")+
+  ylab("Gas Production")+
+  ggtitle("Gas Production of Each County in Each County Level")
 
 # 4
 # ggplot for "Annual Oil Production for each County Level"
@@ -217,16 +226,18 @@ names(County_Level_Mean_Gas_year)[1:12] <- (2000:2011)
 barplot(as.matrix(County_Level_Mean_Gas_year),xlab="Year",ylab="Mean Gas Production",main="Mean Gas Production By County",ylim=c(0,8e+7),col=heat.colors(9))+
   legend(title="County","right",c("9","8","7","6","5","4","3","2","1"),cex=0.9,inset=c(-0.08,0),bty="n",xpd=TRUE,fill=rev(heat.colors(9)))
 
-# 6 
+# 6 Demographics - 2001-2011 oil and gas Production for each county
  
 library(choroplethr)
 library(choroplethrMaps)
 
+# create a table with FIPS and total oil production from 2001-2011
 totaloil <- county_production %>% 
   select(FIPS, mean_oil_production) %>%
   unique() %>%
   mutate()
 
+# in order to use county_choropleth function, rename the columns according to the function requirements
 names(totaloil)[1] <- "region"
 names(totaloil)[2] <- "value"
 
@@ -234,6 +245,7 @@ county_choropleth (totaloil,
                    title ="2001-2011 Oil Production", 
                    legend = "Quantity")
 
+# same procedure for gas
 totalgas <- county_production %>% 
   select(FIPS, mean_gas_production) %>%
   unique() %>%
@@ -245,4 +257,3 @@ names(totalgas)[2] <- "value"
 county_choropleth (totalgas,
                    title ="2001-2011 Gas Production", 
                    legend = "Quantity")
-

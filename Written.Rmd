@@ -30,8 +30,9 @@ The Second is a pair of graphs showing the mean production level of oil and gas 
 ![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\2_2.png)
 
 
-The third is a scatterplot showing how those couties lie in diffenrent county levels and oil production level.
-![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\3.png)
+The third is a pair of scatterplots showing how those couties lie in diffenrent county levels and oil&gas production amount.
+![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\3_1.png)
+![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\3_2.png)
 
 
 The fourth is pair of graphs showing the change in oil and gas production for each county level from 2000 to 2011.
@@ -44,7 +45,7 @@ The fifth is a pair of stack columns shows the total production each year for al
 ![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\5_2.png)
 
 
-The sixth demographic maps of oil and gas production for each county through 2001 to 2011.
+The sixth is a pair of demographic maps of oil and gas production for each county through 2001 to 2011.
 ![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\6_1.png)
 ![](E:\2016 Fall\MA415\Midterm Project Oil Gas Production\6_2.png)
  
